@@ -1,0 +1,1 @@
+R	190530172840Z	160903174744Z	826F012DE086044C	unknown	/C=UK/ST=SUSSEX/L=Brighton/O=Example Co/OU=IT/CN=client2/emailAddress=certs@example.com
