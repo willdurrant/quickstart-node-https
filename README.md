@@ -178,6 +178,27 @@ If all goes well, it won't work anymore. Just as a sanity check, let's make sure
 
 Likewise, if all is well, client 1 still works while client 2 is rejected.
 
+Verifying it with Curl 
+======================
+
+Using Curl to verify the above TLS configurations you can try the following examples.
+
+To demonstrate the Server is expecting client authintication the following request will 
+ complain that _SSL peer handshake failed, the server most likely requires a client certificate to connect_
+
+    curl -k https://localhost:4433
+
+So to fix this add the following arguments - Update! on Mac Curl has problems using PEM files see [here](https://www.brandpending.com/2016/05/03/using-a-pem-file-as-a-client-certificate-with-curl-on-mac-os-x/)
+ for further information;
+* -k or --insecure : Disables Certificate Verification against a Root/Intermediate
+* --cert or -E : Tells curl to use the specified certificate file. The certificate must be in PEM format
+* --cert-type : Private key file type (DER, PEM, and ENG are supported)
+* --cacert : CA Certificate
+* --key : Client private key
+
+
+    curl -k --cert-type pem --cert ./tls/client/certs/client1-crt.pem:password --cacert ./tls/ca/certs/ca-crt.pem --key ./tls/client/keys/client1-key.pem "https://localhost:4433"
+
 Conclusion
 ==========
 
